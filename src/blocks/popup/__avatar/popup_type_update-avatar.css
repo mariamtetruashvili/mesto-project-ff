@@ -1,0 +1,17 @@
+.profile__image-container {
+  position: relative;
+  cursor: pointer;
+}
+.profile__avatar-edit-icon {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8) url("/src/images/edit-icon.svg") center/26px
+    26px no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s;
+  margin-right: 29px;
+}
+
+.profile__image-container:hover .profile__avatar-edit-icon {
+  opacity: 1;
+}
