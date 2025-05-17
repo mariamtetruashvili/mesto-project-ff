@@ -1,10 +1,7 @@
-// api.js
-
-// Идентификатор когорты и токен авторизации для запросов к API
+// Конфигурация API: идентификатор когорты и токен авторизации
 const cohortId = "wff-cohort-39";
 const token = "a937dc3d-a867-499c-a146-3d115cd1c807";
 
-// Общая конфигурация для запросов: базовый URL и заголовки
 const config = {
   baseUrl: `https://nomoreparties.co/v1/${cohortId}`,
   headers: {
@@ -13,14 +10,20 @@ const config = {
   },
 };
 
-// Получение информации о текущем пользователе
+// Проверка ответа сервера: возвращает JSON или отклоняет промис с ошибкой
+function checkResponse(res) {
+  if (res.ok) return res.json();
+  return Promise.reject(`Ошибка: ${res.status}`);
+}
+
+// Получить информацию о текущем пользователе
 export function getUserInfo() {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers,
   }).then(checkResponse);
 }
 
-// Обновление информации о пользователе (имя и информация "о себе")
+// Обновить имя и описание пользователя
 export function updateUserInfo(name, about) {
   return fetch(`${config.baseUrl}/users/me`, {
     method: "PATCH",
@@ -29,14 +32,14 @@ export function updateUserInfo(name, about) {
   }).then(checkResponse);
 }
 
-// Получение массива карточек с сервера
+// Получить список карточек
 export function getCards() {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers,
   }).then(checkResponse);
 }
 
-// Добавление новой карточки на сервер (с указанием названия и ссылки на изображение)
+// Добавить новую карточку
 export function addCardToServer(name, link) {
   return fetch(`${config.baseUrl}/cards`, {
     method: "POST",
@@ -45,7 +48,7 @@ export function addCardToServer(name, link) {
   }).then(checkResponse);
 }
 
-// Обновление аватара пользователя
+// Обновить аватар пользователя
 export function updateAvatar(avatarUrl) {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: "PATCH",
@@ -54,10 +57,26 @@ export function updateAvatar(avatarUrl) {
   }).then(checkResponse);
 }
 
-// Функция для проверки ответа от сервера
-// Если ответ успешный (status 200-299), возвращаем распарсенный JSON
-// Иначе отклоняем промис с сообщением об ошибке и статусом
-function checkResponse(res) {
-  if (res.ok) return res.json();
-  return Promise.reject(`Ошибка: ${res.status}`);
+// Удалить карточку по ID
+export function deleteCardApi(cardId) {
+  return fetch(`${config.baseUrl}/cards/${cardId}`, {
+    method: "DELETE",
+    headers: config.headers,
+  }).then(checkResponse);
+}
+
+// Поставить лайк карточке
+export function likeCard(cardId) {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: "PUT",
+    headers: config.headers,
+  }).then(checkResponse);
+}
+
+// Убрать лайк с карточки
+export function dislikeCard(cardId) {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    method: "DELETE",
+    headers: config.headers,
+  }).then(checkResponse);
 }

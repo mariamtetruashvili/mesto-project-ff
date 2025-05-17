@@ -76,9 +76,12 @@
               name="name"
               class="popup__input popup__input_type_name"
               placeholder="Имя"
-              data-min-length="2"
-              data-max-length="40"
-              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+              minlength="2"
+              maxlength="40"
+              pattern="^[a-zA-Zа-яА-ЯёЁ\s-]+$"
+              data-error-required="Вы пропустили это поле."
+              data-error-length="Допустимое количество символов: от 2 до 40"
+              data-error-pattern="Разрешены только латинские, кириллические буквы, дефисы и пробелы"
               required
             />
             <span class="popup__error" id="name-error"></span>
@@ -89,9 +92,12 @@
               name="description"
               class="popup__input popup__input_type_description"
               placeholder="Занятие"
-              data-min-length="2"
-              data-max-length="200"
-              data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+              minlength="2"
+              maxlength="200"
+              pattern="^[a-zA-Zа-яА-ЯёЁ\s-]+$"
+              data-error-required="Вы пропустили это поле."
+              data-error-length="Допустимое количество символов: от 2 до 200"
+              data-error-pattern="Разрешены только латинские, кириллические буквы, дефисы и пробелы"
               required
             />
             <span class="popup__error" id="description-error"></span>
@@ -114,6 +120,12 @@
               name="place-name"
               class="popup__input popup__input_type_card-name"
               placeholder="Название"
+              minlength="2"
+              maxlength="30"
+              pattern="^[a-zA-Zа-яА-ЯёЁ\s-]+$"
+              data-error-required="Вы пропустили это поле."
+              data-error-length="Допустимое количество символов: от 2 до 30"
+              data-error-pattern="Разрешены только латинские, кириллические буквы, дефисы и пробелы"
               required
             />
             <span class="popup__error" id="place-name-error"></span>
